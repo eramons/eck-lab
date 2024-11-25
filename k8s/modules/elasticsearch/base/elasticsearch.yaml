@@ -28,15 +28,14 @@ spec:
         - name: sysctl  # Init container to set kernel parameters (required by Elasticsearch)
           command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']  # Increase vm.max_map_count for Elasticsearch
 
-# Persistent Volume Claim for Elasticsearch data storage
-# Use volumeClaimTemplates to request storage for each Elasticsearch pod in the StatefulSet
-volumeClaimTemplates:
-  - metadata:
-      name: elasticsearch-data  # Name of the volume claim
-    spec:
-      accessModes:
-        - ReadWriteOnce  # Each pod will have exclusive access to its volume
-      resources:
-        requests:
-          storage: 1Gi  # Request 1Gi of storage for each pod (adjust as needed)
-
+    # Persistent Volume Claim for Elasticsearch data storage
+    # Use volumeClaimTemplates to request storage for each Elasticsearch pod in the StatefulSet
+    volumeClaimTemplates:
+      - metadata:
+          name: elasticsearch-data  # Name of the volume claim
+        spec:
+          accessModes:
+            - ReadWriteOnce  # Each pod will have exclusive access to its volume
+          resources:
+            requests:
+              storage: 1Gi  # Request 1Gi of storage for each pod (adjust as needed)
