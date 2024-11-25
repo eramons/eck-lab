@@ -1,0 +1,5 @@
+# k8s/modules/elasticsearch/base/kustomization.yaml
+
+resources:
+  - elasticsearch.yaml
+  - kibana.yaml
