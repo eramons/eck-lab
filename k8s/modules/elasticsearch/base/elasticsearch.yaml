@@ -1,0 +1,42 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+spec:
+  version: 8.16.1
+  http:
+    service:
+      spec:
+        type: ClusterIP  # Expose Elasticsearch as a ClusterIP service (internal access only)
+  nodeSets:
+  - name: data
+    count: 1  # Single node for demo purposes, scale as needed
+    config:
+      node.store.allow_mmap: false  # Disable mmap for node storage (for compatibility)
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          resources:
+            requests:
+              memory: 2Gi  # Minimum memory request for Elasticsearch
+              cpu: 1       # Minimum CPU request for Elasticsearch
+            limits:
+              memory: 2Gi  # Maximum memory limit for Elasticsearch
+              cpu: 1       # Maximum CPU limit for Elasticsearch
+        initContainers:
+        - name: sysctl  # Init container to set kernel parameters (required by Elasticsearch)
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']  # Increase vm.max_map_count for Elasticsearch
+
+# Persistent Volume Claim for Elasticsearch data storage
+# Use volumeClaimTemplates to request storage for each Elasticsearch pod in the StatefulSet
+volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-data  # Name of the volume claim
+    spec:
+      accessModes:
+        - ReadWriteOnce  # Each pod will have exclusive access to its volume
+      resources:
+        requests:
+          storage: 1Gi  # Request 1Gi of storage for each pod (adjust as needed)
+
