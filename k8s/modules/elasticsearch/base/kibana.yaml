@@ -1,0 +1,27 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: 8.16.1  # Kibana version updated to 8.16.1
+  count: 1  # Single instance of Kibana for demo purposes
+  elasticsearchRef:
+    name: elasticsearch  # Reference to the Elasticsearch cluster
+
+  podTemplate:
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            requests:
+              memory: 1Gi  # Minimum memory request for Kibana
+              cpu: 0.5    # Minimum CPU request for Kibana
+            limits:
+              memory: 1Gi  # Maximum memory limit for Kibana
+              cpu: 0.5    # Maximum CPU limit for Kibana
+
+  http:
+    service:
+      spec:
+        type: ClusterIP  # Expose Kibana as a ClusterIP service (internal access only)
+
