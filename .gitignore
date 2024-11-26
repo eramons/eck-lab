@@ -3,6 +3,7 @@ terraform/**/*.tfstate
 terraform/**/*.tfstate.*
 terraform/**/*.tfvars
 terraform/.terraform/
+terraform/.terraform.lock.hcl
 
 # Ignore variables definition
 terraform/terraform.tfvars
