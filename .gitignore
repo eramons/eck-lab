@@ -1,0 +1,12 @@
+# Ignore Terraform state and other sensitive files
+terraform/**/*.tfstate
+terraform/**/*.tfstate.*
+terraform/**/*.tfvars
+terraform/.terraform/
+
+# Ignore variables definition
+terraform/terraform.tfvars
+
+# Ignore keys 
+terraform/keys/
+
