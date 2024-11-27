@@ -16,6 +16,6 @@ The project is organized into Kubernetes manifests using **Kustomize**.
 ## Terraform Resources
 
 
-The terraform configuration examples provide an optional way to deploy the Google Cloud Platform (GCP) infrastructure to support Kubernetes-based demo environment.
+The terraform configuration examples provide an optional way to deploy the Google Cloud Platform (GCP) infrastructure to support a Kubernetes-based demo environment.
 
 For more details, check the [Terraform README](terraform/README.md).
