@@ -9,9 +9,9 @@ The environment is organized into separate modules, which can be applied indepen
 
 The project is organized into Kubernetes manifests using **Kustomize**.
 
-- **`k8s/modules/elasticsearch/`(k8s/modules/elasticsearch/README.md)**: Contains the configuration for deploying Elasticsearch and Kibana. 
-- **`k8s/modules/fleet/`**: Future module for Fleet (coming soon).
-- **`k8s/modules/apm/`**: Future module for APM (coming soon).
+- **`k8s/resources/elasticsearch/`(k8s/resources/elasticsearch/base/README.md)**: Contains a basic configuration for deploying Elasticsearch and Kibana. 
+
+For more details, check the [K8s README](k8s/README.md))
 
 ## Terraform Resources
 
