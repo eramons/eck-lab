@@ -9,12 +9,17 @@ The environment is organized into separate modules, which can be applied indepen
 
 The project is organized into Kubernetes manifests using **Kustomize**.
 
-- **`k8s/modules/elasticsearch/`**: Contains the configuration for deploying Elasticsearch and Kibana. [Link to README](k8s/modules/elasticsearch/README.md)
+- **`k8s/modules/elasticsearch/`(k8s/modules/elasticsearch/README.md)**: Contains the configuration for deploying Elasticsearch and Kibana. 
 - **`k8s/modules/fleet/`**: Future module for Fleet (coming soon).
 - **`k8s/modules/apm/`**: Future module for APM (coming soon).
 
 ## Terraform Resources
 
-To fully automate the infrastructure setup, you can use the Terraform modules provided in this project. 
 
-The Terraform module documentation is **coming soon**.
+The terraform configuration examples provide an optional way to deploy the Google Cloud Platform (GCP) infrastructure to support Kubernetes-based demo environment.
+
+The terraform modules included are:
+- **[GKE](terraform/modules/gke/README.md)**: Provisions the [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) cluster and associated resources.
+- **(terraform/modules/helm/README.md)**: Deploys eessential Kubernetes utilities using Helm charts.
+- **Opentelemetry**: *(Coming soon)*
+- **Ollama**: *(Coming soon)*
