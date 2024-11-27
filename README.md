@@ -1,5 +1,5 @@
 # eck-lab
-Modular, cloud-native Elasticsearch and Kibana demo environment with Terraform and Kubernetes
+**Modular, cloud-native Elasticsearch and Kibana demo environment with Terraform and Kubernetes**
 
 This repository contains a modular demo environment for **Elasticsearch** and **Kibana**, deployed using [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html). 
 
