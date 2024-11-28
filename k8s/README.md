@@ -2,7 +2,7 @@
 
 This directory contains the Kubernetes manifests for deploying and managing the Elastic Stack and other related resoures in your Kubernetes cluster. The resources are modular and can be used in different combinations to customize the setup. 
 
-- **`k8s/resources/elasticsearch/`(k8s/resources/elasticsearch/base/README.md)**: Contains a basic configuration for deploying Elasticsearch and Kibana.
+- **`k8s/resources/elasticsearch/`(elasticsearch/base/README.md)**: Contains a basic configuration for deploying Elasticsearch and Kibana.
 
 ## Overview
 
