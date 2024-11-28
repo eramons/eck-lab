@@ -7,13 +7,13 @@ The environment is organized into separate modules, which can be applied indepen
 
 ## Kubernetes Resources
 
-The project is organized into Kubernetes manifests using **Kustomize**.
+The K8s resources are organized into Kubernetes manifests using **Kustomize**.
 
-For more details, check the [K8s README](k8s/README.md)
+[K8s](k8s/)
 
 ## Terraform Resources
 
 
-The terraform configuration examples provide an optional way to deploy the Google Cloud Platform (GCP) infrastructure to support a Kubernetes-based demo environment.
+The terraform configuration examples provide a way to spin up the necessary Google Cloud Platform (GCP) infrastructure to deploy the ECK examples.
 
-For more details, check the [Terraform README](terraform/README.md).
+[Terraform](terraform/).
