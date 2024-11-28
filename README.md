@@ -9,7 +9,7 @@ The environment is organized into separate modules, which can be applied indepen
 
 The project is organized into Kubernetes manifests using **Kustomize**.
 
-For more details, check the [K8s README](k8s/README.md))
+For more details, check the [K8s README](k8s/README.md)
 
 ## Terraform Resources
 
