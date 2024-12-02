@@ -1,3 +1,9 @@
 resources: 
   - ../base
   - ingress.yaml # Define the Ingress resource to expose Kibana
+
+patches:
+  - path: ssl-patch.yaml
+    target:
+      kind: Kibana
+      name: kibana

@@ -1,6 +1,0 @@
-# k8s/resources/kustomization.yaml
-resources:
-  - ../modules/elasticsearch/base          # Reference the base kustomization
-  - ingress/ingress.yaml                   # Ingress resources
-  - apm/apm.yaml			   # APM server
-  
