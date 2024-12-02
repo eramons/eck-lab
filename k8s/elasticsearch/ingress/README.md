@@ -1,6 +1,6 @@
 # Ingress Overlay
 
-This overlay adds ingress resources to enable external access to Kibana. It relies on an ingress controller installed in your Kubernetes cluster to route traffic and manage SSL termination.
+This overlay is built on top of the basic configuration adding ingress resources to enable external access to Kibana. It relies on an ingress controller installed in your Kubernetes cluster to route traffic and manage SSL termination.
 
 ## Prerequisites
  
@@ -25,3 +25,9 @@ You can also dynamically replace the placeholder using the following command:
 export dns_hostname=your-dynamic-hostname.example.com
 envsubst < ingress.yaml | kubectl apply -f -
 
+## Apply
+
+To apply this overlay:
+```
+kubectl apply -k k8s/elasticsearch/ingress
+```

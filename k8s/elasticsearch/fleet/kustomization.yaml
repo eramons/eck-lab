@@ -1,6 +1,5 @@
 resources:
-  - ../base
-  - ingress.yaml
+  - ../ingress
   - fleet-server.yaml
   - elastic-agent.yaml
 
