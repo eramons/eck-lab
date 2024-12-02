@@ -1,0 +1,11 @@
+resources:
+  - ../base
+  - ingress.yaml
+  - fleet-server.yaml
+  - elastic-agent.yaml
+
+patches:
+  - path: kibana-patch.yaml
+    target:
+      kind: Kibana
+      name: kibana
