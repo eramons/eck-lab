@@ -15,6 +15,18 @@ resource "google_compute_subnetwork" "subnet" {
   ip_cidr_range = "10.10.0.0/24"
 }
 
+output "gcp_vpc_name" {
+  value = google_compute_network.vpc.name
+}
+
+output "gcp_vpc_self_link" {
+  value = google_compute_network.vpc.self_link
+}
+
+output "gcp_vpc_subnet_self_link" {
+  value = google_compute_subnetwork.subnet.self_link
+}
+
 ####################
 # Public static IP #
 ####################
@@ -41,6 +53,9 @@ resource "google_container_cluster" "primary" {
   initial_node_count = 1  
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
+
+  # Allow terraform to destroy the cluster 
+  deletion_protection = false
 
   # kube-state-metrics
   monitoring_config {

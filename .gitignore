@@ -11,3 +11,6 @@ terraform/terraform.tfvars
 # Ignore keys 
 terraform/keys/
 
+# Ignore license
+k8s/license/
+

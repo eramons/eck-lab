@@ -34,3 +34,14 @@ variable "dns_managed_zone" {
   type        = string
 }
 
+variable "deploy_ollama" {
+  description = "Flag to control if the ollama module needs to be deployed"
+  type        = bool
+  default     = false
+}
+
+variable "deploy_opentel" {
+  description = "Flag to control if the opentel module needs to be deployed"
+  type        = bool
+  default     = false
+}

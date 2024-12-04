@@ -60,3 +60,33 @@ module "helm" {
   gke_cluster_token         = data.google_client_config.default.access_token
   ingress_ip                = module.gke.ingress_ip
 }
+
+# Optionally call Ollama Module
+module "ollama" {
+  source = "./modules/ollama"
+  gcp_project = var.gcp_project
+  gcp_location = var.gcp_location
+  demo_name = var.demo_name
+
+  # Pass the networking information from the GKE module, so the K8s cluster and the VM are in the same subnet
+  gcp_vpc_name         = module.gke.gcp_vpc_name
+  gcp_vpc_self_link        = module.gke.gcp_vpc_self_link
+  gcp_vpc_subnet_self_link = module.gke.gcp_vpc_subnet_self_link
+
+
+  # Only deploy if the flag is true
+  count = var.deploy_ollama ? 1 : 0
+}
+
+# Optionally call Opentel Module
+module "opentel" {
+  source = "./modules/opentel"
+ 
+  # Pass the GKE cluster details to the Helm module
+  gke_cluster_endpoint      = module.gke.cluster_endpoint
+  gke_cluster_ca_certificate = module.gke.cluster_ca_certificate
+  gke_cluster_token         = data.google_client_config.default.access_token
+
+  # Only deploy if the flag is true
+  count = var.deploy_opentel ? 1 : 0
+}
