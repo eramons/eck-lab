@@ -19,9 +19,11 @@ spec:
             limits:
               memory: 1Gi  # Maximum memory limit for Kibana
               cpu: 0.5    # Maximum CPU limit for Kibana
-
   http:
     service:
       spec:
-        type: ClusterIP  # Expose Kibana as a ClusterIP service (internal access only)
-
+        type: NodePort 
+        - protocol: TCP
+          port: 5601
+          targetPort: 5601
+          nodePort: 30001
