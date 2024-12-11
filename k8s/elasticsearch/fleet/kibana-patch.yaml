@@ -3,7 +3,11 @@ kind: Kibana
 metadata:
   name: kibana
 spec:
+  version: 8.16.1  
+  elasticsearchRef:
+    name: elasticsearch
   config:
+    server.publicBaseUrl: http://kibana.default.svc:5601  
     xpack.fleet.agents.fleet_server.hosts: ["http://fleet-server-agent-http.default.svc:8220"]
     xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-es-http.default.svc:9200"]
     xpack.fleet.packages:
