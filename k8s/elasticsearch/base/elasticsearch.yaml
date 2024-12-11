@@ -7,7 +7,11 @@ spec:
   http:
     service:
       spec:
-        type: ClusterIP  # Expose Elasticsearch as a ClusterIP service (internal access only)
+        type: NodePort  # Expose Elasticsearch on node port 30002
+        ports:
+          - protocol: TCP
+            port: 9002 
+            nodePort: 30002
   nodeSets:
   - name: data
     count: 1  # Single node for demo purposes, scale as needed
