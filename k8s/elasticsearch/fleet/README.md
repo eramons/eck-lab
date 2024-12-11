@@ -1,6 +1,6 @@
 # Fleet Overlay
 
-This overlay can be built on top of _base_ or on top of _ingress_. It deploys Fleet and the Elastic Agent as part of the Elastic Stack environment in Kubernetes. 
+This overlay is built on top of _base_. It deploys Fleet and the Elastic Agent as part of the Elastic Stack environment in Kubernetes. 
 
 Fleet is used to manage and monitor Elastic Agents in a centralized manner. The Elastic Agents can be used to collect logs, metrics and APM data. 
 
