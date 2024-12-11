@@ -18,14 +18,3 @@ This overlay includes:
 ## DNS Configuration for Ingress
 
 The `ingress.yaml` file under elasticsearch/ingress uses a placeholder `{{dns_hostname}}` for the DNS hostname. This value should be replaced with the actual DNS hostname during deployment.
-
-## Apply
-
-To apply this overlay, apply the cluster resources first:
-```
-kubectl apply -k k8s/cluster
-```
-Then apply the ingress overlay, which include the base configuration:
-```
-kubectl apply -k k8s/elasticsearch/ingress
-```
