@@ -1,5 +1,6 @@
 resources:
-  - ../ingress
+#  - ../ingress
+# This overlay can base either on base or on ingress, so I'm skipping the explicit definition
   - fleet-server.yaml
   - elastic-agent.yaml
 

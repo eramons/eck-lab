@@ -10,7 +10,7 @@ spec:
         type: NodePort  # Expose Elasticsearch on node port 30002
         ports:
           - protocol: TCP
-            port: 9002 
+            port: 9200 
             nodePort: 30002
   nodeSets:
   - name: data
