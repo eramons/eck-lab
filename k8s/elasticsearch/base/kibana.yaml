@@ -7,8 +7,8 @@ spec:
   count: 1  # Single instance of Kibana for demo purposes
   elasticsearchRef:
     name: elasticsearch  # Reference to the Elasticsearch cluster
-  config: 
-    server.publicBaseUrl: http://localhost:30001
+#  config: 
+#    server.publicBaseUrl: http://localhost:30001
   podTemplate:
     spec:
       containers:
@@ -25,7 +25,8 @@ spec:
       spec:
         type: NodePort  # Expose kibana on node port 30001
         ports:
-          - protocol: TCP
+          - name: http
+            protocol: TCP
             port: 5601
             nodePort: 30001
     tls:
