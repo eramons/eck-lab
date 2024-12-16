@@ -23,11 +23,11 @@ spec:
         - name: agent 
           resources:
             limits:
-              cpu: 100m
-              memory: 500Mi
-            requests:
-              cpu: 100m
+              cpu: 0.5
               memory: 200Mi
+            requests:
+              cpu: 0.5 
+              memory: 500Mi
         serviceAccountName: fleet-server
         automountServiceAccountToken: true
         securityContext:
