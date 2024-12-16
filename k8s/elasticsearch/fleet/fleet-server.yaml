@@ -24,10 +24,10 @@ spec:
           resources:
             limits:
               cpu: 0.5
-              memory: 200Mi
+              memory: 500Mi
             requests:
               cpu: 0.5 
-              memory: 500Mi
+              memory: 200Mi
         serviceAccountName: fleet-server
         automountServiceAccountToken: true
         securityContext:
