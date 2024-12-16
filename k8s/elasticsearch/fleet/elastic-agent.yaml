@@ -31,14 +31,11 @@ spec:
           volumeMounts:
           - name: elastic-agent-state
             mountPath: /usr/share/elastic-agent/state   
-  volumeClaimTemplates:
-  - metadata:
-    name: elastic-agent-state
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 200Mi
+        volumes:
+          - hostPath:
+              path: /var/lib/elastic-agent
+              type: DirectoryOrCreate
+            name: elastic-agent-state
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
