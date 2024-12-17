@@ -4,6 +4,7 @@ terraform/**/*.tfstate.*
 terraform/**/*.tfvars
 terraform/.terraform/
 terraform/.terraform.lock.hcl
+terraform/kubeconfig.cmd
 
 # Ignore variables definition
 terraform/terraform.tfvars
