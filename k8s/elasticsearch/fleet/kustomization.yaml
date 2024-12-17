@@ -1,5 +1,4 @@
 resources:
-  - ../base
   - fleet-server.yaml
   - elastic-agent.yaml
 
