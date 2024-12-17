@@ -27,6 +27,7 @@ output "gcp_vpc_subnet_self_link" {
   value = google_compute_subnetwork.subnet.self_link
 }
 
+
 ####################
 # Public static IP #
 ####################
@@ -94,6 +95,11 @@ output "cluster_endpoint" {
 output "cluster_ca_certificate" {
   value = base64decode(google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
 }
+
+output "pod_cidr" {
+  value = google_container_cluster.primary.cluster_ipv4_cidr
+}
+
 
 ################
 # DNS A Record #

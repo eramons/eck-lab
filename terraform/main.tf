@@ -72,6 +72,7 @@ module "ollama" {
   gcp_vpc_name         = module.gke.gcp_vpc_name
   gcp_vpc_self_link        = module.gke.gcp_vpc_self_link
   gcp_vpc_subnet_self_link = module.gke.gcp_vpc_subnet_self_link
+  gcp_vpc_pod_cidr         = module.gke.pod_cidr
 
 
   # Only deploy if the flag is true

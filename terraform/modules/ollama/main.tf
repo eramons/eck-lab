@@ -27,7 +27,10 @@ resource "google_compute_firewall" "allow_gke_to_vm" {
   direction = "INGRESS"
 
   # Allow traffic from GKE Pod CIDR
-  source_ranges = ["10.124.0.0/14"]
+#  source_ranges = ["10.124.0.0/14"]
+
+  # Use dynamic CIDR block from GKE
+  source_ranges = [var.gcp_vpc_pod_cidr]
 
   # Target the specific VM by its network tag
   target_tags = ["${var.demo_name}-ollama-vm"] # Ensure this tag is added to your VM
@@ -42,7 +45,7 @@ resource "google_compute_firewall" "allow_gke_to_vm" {
 # Configure the VM
 resource "google_compute_instance" "ollama_vm" {
   name         = "${var.demo_name}-ollama-vm"
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-4"
   zone         = var.gcp_location
 
   # Define the boot disk and its image
@@ -62,7 +65,13 @@ resource "google_compute_instance" "ollama_vm" {
     access_config {}
   }
 
-   # Attach the firewall tag for SSH access
+  # For hosting the LLM to interact with the AI Assistant I need at least 1 GPU 
+  guest_accelerator {
+    type  = "nvidia-tesla-p4"
+    count = 1
+  }
+
+  # Attach the firewall tag for SSH access
   tags = ["ssh-access", "${var.demo_name}-ollama-vm"]  # This allows the firewall rule to apply
 
   # Startup script to install Ollama
@@ -82,7 +91,9 @@ resource "google_compute_instance" "ollama_vm" {
 
   # Modify systemd service to bind Ollama to 0.0.0.0
   echo "Setting OLLAMA_HOST=0.0.0.0 in the systemd service" >> /var/log/ollama-install.log
-  echo "Environment=OLLAMA_HOST=0.0.0.0" | sudo tee -a /etc/systemd/system/ollama.service >> /var/log/ollama-install.log
+
+  # Use sed to insert the Environment line under the [Service] section
+  sudo sed -i '/\[Service\]/a Environment=OLLAMA_HOST=0.0.0.0' /etc/systemd/system/ollama.service >> /var/log/ollama-install.log
 
   # Reload systemd and restart Ollama service
   echo "Reloading systemd and restarting Ollama service" >> /var/log/ollama-install.log

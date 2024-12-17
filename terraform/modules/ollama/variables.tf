@@ -27,3 +27,9 @@ variable "gcp_vpc_subnet_self_link" {
   description = "The self_link of the subnet in the VPC"
   type        = string
 }
+
+variable "gcp_vpc_pod_cidr" {
+  description = "The CIDR range for the GKE cluster pods"
+  type        = string
+}
+

@@ -15,3 +15,5 @@ terraform/keys/
 # Ignore license
 k8s/license/
 
+# Ignore my TODOs
+TODO.md
