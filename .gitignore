@@ -15,5 +15,8 @@ terraform/keys/
 # Ignore license
 k8s/license/
 
+# Ignore ollama config text file
+k8s/elasticsearch/ml/connector-config.txt
+
 # Ignore my TODOs
 TODO.md

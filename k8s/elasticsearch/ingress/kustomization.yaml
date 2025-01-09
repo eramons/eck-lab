@@ -1,3 +1,4 @@
 resources: 
   - ../base
-  - ingress.yaml # Expose Kibana externally 
+  - ingress.yaml 
+  - clusterissuer.yaml
