@@ -49,18 +49,12 @@ opentelemetry-collector:
     - name: ELASTIC_AGENT_OTEL
       value: "true"
     - name: ELASTIC_APM_ENDPOINT
-      value: value: "apm-server-apm-http:8200"
-#      valueFrom:
-#        secretKeyRef:
-#          name: elastic-secret
-#          key: elastic_apm_endpoint
+      value: "apm-server-apm-http:8200"
     - name: ELASTIC_APM_SECRET_TOKEN
       valueFrom:
         secretKeyRef:
           name: apm-server-apm-token
           key: secret-token
-#          name: elastic-secret
-#          key: elastic_apm_secret_token
 
   alternateConfig:
     extensions:
@@ -72,9 +66,11 @@ opentelemetry-collector:
       debug: {}
       otlp/elastic:
         endpoint: ${env:ELASTIC_APM_ENDPOINT}
+        tls:
+          insecure: true
         compression: none
         headers:
-          Authorization: ${env:ELASTIC_APM_SECRET_TOKEN}
+          Authorization: Bearer ${env:ELASTIC_APM_SECRET_TOKEN}
     processors:
       batch: {}
       resource:

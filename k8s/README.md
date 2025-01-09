@@ -12,3 +12,4 @@ The K8s resources are organized into separate subdirectories:
  * [**elasticsearch/fleets**](elasticsearch/fleet/): Set up a fleet server and an elastic agent. 
  * [**elasticsearch/apm/**](elasticsearch/apm/): Application Performance Monitoring (APM) server.
  * [**elasticsearch/ml/**](elasticsearch/ml/): Add a dedicated machine learning elasticsearch node.
+ * [**elasticsearch/search/**](elasticsearch/ml/): Add Enterprise Search. 
