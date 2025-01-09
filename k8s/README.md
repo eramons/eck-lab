@@ -6,10 +6,10 @@ This directory contains the Kubernetes manifests for deploying and managing the 
 
 The K8s resources are organized into separate subdirectories: 
  
- * [**cluster/**](cluster/): Contains cluster-wide resources and configurations, including the ECK Custom Resource Definitions (CRDs), the ECK Operator, and the ClusterIssuer for SSL certificate issuance.
+ * [**cluster/**](cluster/): Contains cluster-wide resources and configurations, including the ECK Custom Resource Definitions (CRDs) and the ECK Operator.
  * [**elasticsearch/base**](elasticsearch/base/): Contains the manifests for deploying a basic stack with Elasticsearch and Kibana. 
- * [**elasticsearch/ingress**](elasticsearch/ingress/): expose Kibana service externally via ingress through a trusted ssl-protected https endpoint.
+ * [**elasticsearch/ingress**](elasticsearch/ingress/): expose Kibana service externally via ingress through a trusted ssl-protected https endpoint. It includes a ClusterIssuer for certificate issuance with Let's Encrypt.
  * [**elasticsearch/fleets**](elasticsearch/fleet/): Set up a fleet server and an elastic agent. 
  * [**elasticsearch/apm/**](elasticsearch/apm/): Application Performance Monitoring (APM) server.
  * [**elasticsearch/ml/**](elasticsearch/ml/): Add a dedicated machine learning elasticsearch node.
- * [**elasticsearch/search/**](elasticsearch/ml/): Add Enterprise Search. 
+ * [**elasticsearch/search/**](elasticsearch/search/): Add Enterprise Search. 
