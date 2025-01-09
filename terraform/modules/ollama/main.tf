@@ -45,7 +45,7 @@ resource "google_compute_firewall" "allow_gke_to_vm" {
 # Configure the VM
 resource "google_compute_instance" "ollama_vm" {
   name         = "${var.demo_name}-ollama-vm"
-  machine_type = "n1-standard-4"
+  machine_type = "g2-standard-4"
   zone         = var.gcp_location
 
   # Define the boot disk and its image
@@ -67,8 +67,13 @@ resource "google_compute_instance" "ollama_vm" {
 
   # For hosting the LLM to interact with the AI Assistant I need at least 1 GPU 
   guest_accelerator {
-    type  = "nvidia-tesla-p4"
+    type  = "nvidia-l4"
     count = 1
+  }
+
+  # Machines with GPUs don't allow migration, which is enabled by default with terraform
+  scheduling {
+    on_host_maintenance = "TERMINATE" # Must terminate the instance during host maintenance
   }
 
   # Attach the firewall tag for SSH access
