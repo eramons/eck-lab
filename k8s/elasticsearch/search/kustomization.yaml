@@ -1,0 +1,8 @@
+resources:
+  - ../ingress
+  - enterprisesearch.yaml
+patches:
+  - path: kibana-patch.yaml
+    target:
+      kind: Kibana
+      name: kibana
