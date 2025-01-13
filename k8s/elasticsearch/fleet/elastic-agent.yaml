@@ -23,11 +23,11 @@ spec:
         - name: agent
           resources:
             limits:
-              cpu: 0.5 
-              memory: 500Mi
+              cpu: 1
+              memory: 1Gi 
             requests:
               cpu: 0.5 
-              memory: 200Mi
+              memory: 500Mi
           volumeMounts:
           - name: elastic-agent-state
             mountPath: /usr/share/elastic-agent/state   
