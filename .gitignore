@@ -20,3 +20,6 @@ k8s/elasticsearch/ml/connector-config.txt
 
 # Ignore my TODOs
 TODO.md
+
+# Ignore .swp files
+*.swp
