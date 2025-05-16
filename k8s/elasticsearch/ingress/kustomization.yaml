@@ -1,4 +1,3 @@
 resources: 
-  - ../base
   - ingress.yaml 
   - clusterissuer.yaml

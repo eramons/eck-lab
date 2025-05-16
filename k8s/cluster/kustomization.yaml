@@ -5,6 +5,3 @@ resources:
 
   # Operator
   - https://download.elastic.co/downloads/eck/2.14.0/operator.yaml
-
-  # Cluster issuer
-#  - clusterissuer.yaml

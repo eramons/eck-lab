@@ -7,8 +7,6 @@ spec:
   count: 1  # Single instance of Kibana for demo purposes
   elasticsearchRef:
     name: elasticsearch  # Reference to the Elasticsearch cluster
-#  config: 
-#    server.publicBaseUrl: http://localhost:30001
   podTemplate:
     spec:
       containers:
