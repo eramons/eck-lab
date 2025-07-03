@@ -18,6 +18,7 @@ resource "helm_release" "cert_manager" {
   namespace  = "cert-manager"
   create_namespace = true
 
+  # This flag is throwing a deprecation warning, however there is no alternative yet
   set {
     name  = "installCRDs"
     value = "true"
@@ -31,16 +32,18 @@ resource "helm_release" "kube_state_metrics" {
   chart      = "kube-state-metrics"
 }
 
-resource "helm_release" "argocd" {
-  name       = "argocd"
-  namespace  = "argocd"
-  create_namespace = true
+# ArgoCD deployment disabled in this blog version
 
-  repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo-cd"
-  version    = "5.51.6" 
-
-  values = [
-    file("${path.module}/values/argocd.yaml")
-  ]
-}
+# resource "helm_release" "argocd" {
+#   name       = "argocd"
+#   namespace  = "argocd"
+#   create_namespace = true
+# 
+#   repository = "https://argoproj.github.io/argo-helm"
+#   chart      = "argo-cd"
+#   version    = "5.51.6" 
+# 
+#   values = [
+#     file("${path.module}/values/argocd.yaml")
+#   ]
+# }

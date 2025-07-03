@@ -40,6 +40,14 @@ module "gke" {
   dns_managed_zone = var.dns_managed_zone
 }
 
+output "gke_cluster_name" {
+  value = module.gke.cluster_name
+}
+
+output "gke_cluster_region" {
+  value = module.gke.cluster_region
+}
+
 output "gke_cluster_endpoint" {
   value = module.gke.cluster_endpoint
 }
@@ -52,8 +60,6 @@ output "cluster_ca_certificate" {
 module "helm" {
   source = "./modules/helm"
 
-  # depends_on = [null_resource.wait_for_k8s]
-
   # Pass the GKE cluster details to the Helm module
   gke_cluster_endpoint      = module.gke.cluster_endpoint
   gke_cluster_ca_certificate = module.gke.cluster_ca_certificate
@@ -61,33 +67,37 @@ module "helm" {
   ingress_ip                = module.gke.ingress_ip
 }
 
+
+# NOTE: Ollama and OpenTelemetry are not used in this blog version.
+# These modules remain available but are excluded from this deployment.
+
 # Optionally call Ollama Module
-module "ollama" {
-  source = "./modules/ollama"
-  gcp_project = var.gcp_project
-  gcp_location = var.gcp_location
-  demo_name = var.demo_name
-
-  # Pass the networking information from the GKE module, so the K8s cluster and the VM are in the same subnet
-  gcp_vpc_name         = module.gke.gcp_vpc_name
-  gcp_vpc_self_link        = module.gke.gcp_vpc_self_link
-  gcp_vpc_subnet_self_link = module.gke.gcp_vpc_subnet_self_link
-  gcp_vpc_pod_cidr         = module.gke.pod_cidr
-
-
-  # Only deploy if the flag is true
-  count = var.deploy_ollama ? 1 : 0
-}
-
-# Optionally call Opentel Module
-module "opentel" {
-  source = "./modules/opentel"
- 
-  # Pass the GKE cluster details to the Helm module
-  gke_cluster_endpoint      = module.gke.cluster_endpoint
-  gke_cluster_ca_certificate = module.gke.cluster_ca_certificate
-  gke_cluster_token         = data.google_client_config.default.access_token
-
-  # Only deploy if the flag is true
-  count = var.deploy_opentel ? 1 : 0
-}
+# module "ollama" {
+#   source = "./modules/ollama"
+#   gcp_project = var.gcp_project
+#   gcp_location = var.gcp_location
+#   demo_name = var.demo_name
+# 
+#   # Pass the networking information from the GKE module, so the K8s cluster and the VM are in the same subnet
+#   gcp_vpc_name         = module.gke.gcp_vpc_name
+#   gcp_vpc_self_link        = module.gke.gcp_vpc_self_link
+#   gcp_vpc_subnet_self_link = module.gke.gcp_vpc_subnet_self_link
+#   gcp_vpc_pod_cidr         = module.gke.pod_cidr
+# 
+# 
+#   # Only deploy if the flag is true
+#   count = var.deploy_ollama ? 1 : 0
+# }
+# 
+# # Optionally call Opentel Module
+# module "opentel" {
+#   source = "./modules/opentel"
+#  
+#   # Pass the GKE cluster details to the Opentel module
+#   gke_cluster_endpoint      = module.gke.cluster_endpoint
+#   gke_cluster_ca_certificate = module.gke.cluster_ca_certificate
+#   gke_cluster_token         = data.google_client_config.default.access_token
+# 
+#   # Only deploy if the flag is true
+#   count = var.deploy_opentel ? 1 : 0
+# }
