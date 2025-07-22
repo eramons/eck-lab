@@ -10,7 +10,7 @@ spec:
         type: ClusterIP
   nodeSets:
   - name: data
-    count: 1  # Single node for demo purposes, scale as needed
+    count: 3  
     config:
       node.store.allow_mmap: false  # Disable mmap for node storage (for compatibility)
     podTemplate:

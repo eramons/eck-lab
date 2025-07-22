@@ -21,12 +21,7 @@ spec:
   http:
     service:
       spec:
-        type: NodePort  # Expose kibana on node port 30001
-        ports:
-          - name: http
-            protocol: TCP
-            port: 5601
-            nodePort: 30001
+        type: ClusterIP
     tls:
       selfSignedCertificate:
         disabled: true

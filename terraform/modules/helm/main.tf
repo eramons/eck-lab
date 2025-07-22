@@ -4,7 +4,8 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   namespace  = "ingress-nginx"
   create_namespace = true
-
+  # Pinning to ingress-controller v1.10.1 (default by chart 4.10.1) to avoid breaking changes
+  version    = "4.10.1"
   set {
     name  = "controller.service.loadBalancerIP"
     value = var.ingress_ip
@@ -17,8 +18,8 @@ resource "helm_release" "cert_manager" {
   chart      = "cert-manager"
   namespace  = "cert-manager"
   create_namespace = true
-
-  # This flag is throwing a deprecation warning, however there is no alternative yet
+  # Pinning to version 1.13.3 to avoid breaking changes
+  version    = "1.13.3"
   set {
     name  = "installCRDs"
     value = "true"
@@ -32,7 +33,7 @@ resource "helm_release" "kube_state_metrics" {
   chart      = "kube-state-metrics"
 }
 
-# ArgoCD deployment disabled in this blog version
+# ArgoCD deployment disabled in the blog version
 
 # resource "helm_release" "argocd" {
 #   name       = "argocd"
