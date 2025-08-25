@@ -1,7 +1,7 @@
 resources:
 
   # Custom resource definitions
-  - https://download.elastic.co/downloads/eck/2.14.0/crds.yaml
+  - https://download.elastic.co/downloads/eck/3.1.0/crds.yaml
 
   # Operator
-  - https://download.elastic.co/downloads/eck/2.14.0/operator.yaml
+  - https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
