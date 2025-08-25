@@ -3,14 +3,14 @@ kind: Elasticsearch
 metadata:
   name: elasticsearch
 spec:
-  version: 8.16.1
+  version: 9.1.2 
   http:
     service:
       spec:
         type: ClusterIP
   nodeSets:
   - name: data
-    count: 1  # Single node for demo purposes, scale as needed
+    count: 3
     config:
       node.store.allow_mmap: false  # Disable mmap for node storage (for compatibility)
     podTemplate:
@@ -23,10 +23,7 @@ spec:
               cpu: 1       # Minimum CPU request for Elasticsearch
             limits:
               memory: 2Gi  # Maximum memory limit for Elasticsearch
-              cpu: 1       # Maximum CPU limit for Elasticsearch
-        initContainers:
-        - name: sysctl  # Init container to set kernel parameters (required by Elasticsearch)
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']  # Increase vm.max_map_count for Elasticsearch
+              cpu: 2       # Maximum CPU limit for Elasticsearch
 
     # Persistent Volume Claim for Elasticsearch data storage
     # Use volumeClaimTemplates to request storage for each Elasticsearch pod in the StatefulSet

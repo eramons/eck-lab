@@ -40,6 +40,14 @@ module "gke" {
   dns_managed_zone = var.dns_managed_zone
 }
 
+output "gke_cluster_name" {
+  value = module.gke.cluster_name
+}
+
+output "gke_cluster_region" {
+  value = module.gke.cluster_region
+}
+
 output "gke_cluster_endpoint" {
   value = module.gke.cluster_endpoint
 }
@@ -51,8 +59,6 @@ output "cluster_ca_certificate" {
 # Call Helm Module
 module "helm" {
   source = "./modules/helm"
-
-  # depends_on = [null_resource.wait_for_k8s]
 
   # Pass the GKE cluster details to the Helm module
   gke_cluster_endpoint      = module.gke.cluster_endpoint

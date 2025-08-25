@@ -5,6 +5,8 @@ resource "helm_release" "ingress_nginx" {
   namespace  = "ingress-nginx"
   create_namespace = true
 
+  # Pinning to ingress-controller v1.10.1 (default by chart 4.10.1) to avoid breaking changes
+  version    = "4.10.1"
   set {
     name  = "controller.service.loadBalancerIP"
     value = var.ingress_ip
@@ -18,6 +20,8 @@ resource "helm_release" "cert_manager" {
   namespace  = "cert-manager"
   create_namespace = true
 
+  # Pinning to version 1.13.3 to avoid breaking changes
+  version    = "1.13.3"
   set {
     name  = "installCRDs"
     value = "true"

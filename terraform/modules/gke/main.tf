@@ -51,6 +51,7 @@ data "google_client_config" "default" {}
 resource "google_container_cluster" "primary" {
   name     = "${var.demo_name}-gke"
   location = var.gcp_location
+  # location = var.gcp_region   # Provide region instead location to have a multi-zone cluster
   initial_node_count = 1  
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
@@ -69,8 +70,9 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = google_container_cluster.primary.name
+  # location = var.gcp_region  # Provide region instead of location to have a multi-zone cluster
+  # Provide location instead of region to have only 1 node in 1 zone of the region
   location   = var.gcp_location
-  # If I provide a location instead of a region, there is only 1 node
   cluster    = google_container_cluster.primary.name
   node_count = 1 
   node_config {
@@ -86,6 +88,14 @@ resource "google_container_node_pool" "primary_nodes" {
       disable-legacy-endpoints = "true"
     }
   }
+}
+
+output "cluster_name" {
+  value = google_container_cluster.primary.name
+}
+
+output "cluster_region" {
+  value = google_container_cluster.primary.location
 }
 
 output "cluster_endpoint" {
