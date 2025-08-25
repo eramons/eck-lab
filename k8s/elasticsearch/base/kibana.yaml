@@ -14,10 +14,10 @@ spec:
           resources:
             requests:
               memory: 1Gi  # Minimum memory request for Kibana
-              cpu: 0.5    # Minimum CPU request for Kibana
+              cpu: 1       # Minimum CPU request for Kibana
             limits:
               memory: 1Gi  # Maximum memory limit for Kibana
-              cpu: 0.5    # Maximum CPU limit for Kibana
+              cpu: 1       # Maximum CPU limit for Kibana
   http:
     service:
       spec:
