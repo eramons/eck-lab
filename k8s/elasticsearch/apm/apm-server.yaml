@@ -4,7 +4,7 @@ metadata:
   name: apm-server
   namespace: default
 spec:
-  version: 8.16.1
+  version: 9.1.2
   count: 1
   elasticsearchRef:
     name: elasticsearch
@@ -24,4 +24,4 @@ spec:
             cpu: 0.5
           limits:
             memory: 1Gi
-            cpu: 0.5
+            cpu: 1 
