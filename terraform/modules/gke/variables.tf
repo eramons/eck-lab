@@ -13,11 +13,6 @@ variable "gcp_region" {
   type        = string
 }
 
-variable "gcp_key_path" {
-  description = "API key for GCP"
-  type        = string
-}
-
 variable "gcp_location" {
   description = "Zone for the 1-node GKE cluster"
   type        = string

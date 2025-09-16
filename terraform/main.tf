@@ -9,7 +9,6 @@ terraform {
 provider "google" {
   project     = var.gcp_project
   region      = var.gcp_region
-  credentials = var.gcp_key_path
 }
 
 data "google_client_config" "default" {}
@@ -35,6 +34,7 @@ module "gke" {
   gcp_project = var.gcp_project
   gcp_region = var.gcp_region
   gcp_location = var.gcp_location
+# Remove?
   gcp_key_path = var.gcp_key_path
   dns_hostname = var.dns_hostname
   dns_managed_zone = var.dns_managed_zone
@@ -56,6 +56,10 @@ output "cluster_ca_certificate" {
   value = module.gke.cluster_ca_certificate
 }
 
+output "public_ip" {
+  value = module.gke.ingress_ip
+}
+
 # Call Helm Module
 module "helm" {
   source = "./modules/helm"
@@ -64,7 +68,10 @@ module "helm" {
   gke_cluster_endpoint      = module.gke.cluster_endpoint
   gke_cluster_ca_certificate = module.gke.cluster_ca_certificate
   gke_cluster_token         = data.google_client_config.default.access_token
-  ingress_ip                = module.gke.ingress_ip
+  ingress_ip                = module.gke.ingress_ip  # TODO LATER - rename
+
+  # Choose between GatewayAPI and Ingress
+  controller_type           = var.controller_type
 }
 
 

@@ -50,7 +50,8 @@ data "google_client_config" "default" {}
 # K8s Cluster
 resource "google_container_cluster" "primary" {
   name     = "${var.demo_name}-gke"
-  location = var.gcp_region
+  # Provide location instead of region for 1-zone cluster
+  location   = var.gcp_location 
   initial_node_count = 1  
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
@@ -69,8 +70,8 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = google_container_cluster.primary.name
-  location   = var.gcp_region
-  # Providing a region will deploy one node for location 
+  # Providing location instead of region for 1-zone cluster 
+  location   = var.gcp_location
   cluster    = google_container_cluster.primary.name
   node_count = 1 
   node_config {

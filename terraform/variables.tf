@@ -13,12 +13,6 @@ variable "gcp_region" {
   type        = string
 }
 
-variable "gcp_key_path" {
-  description = "API key for GCP"
-  type        = string
-  sensitive   = true
-}
-
 variable "gcp_location" {
   description = "Zone for the 1-node GKE cluster"
   type        = string
@@ -34,14 +28,22 @@ variable "dns_managed_zone" {
   type        = string
 }
 
-variable "deploy_ollama" {
-  description = "Flag to control if the ollama module needs to be deployed"
-  type        = bool
-  default     = false
+variable "controller_type" {
+  description = "Type of ingress controller to deploy: 'ingress' or 'gatewayapi'"
+  type        = string
+  default     = "ingress"
 }
 
-variable "deploy_opentel" {
-  description = "Flag to control if the opentel module needs to be deployed"
-  type        = bool
-  default     = false
-}
+# Ollama and opentel modules not featured in the blog posts so far
+
+#variable "deploy_opentel" {
+#  description = "Flag to control if the opentel module needs to be deployed"
+#  type        = bool
+#  default     = false
+#}
+
+#variable "deploy_ollama" {
+#  description = "Flag to control if the ollama module needs to be deployed"
+#  type        = bool
+#  default     = false
+#}

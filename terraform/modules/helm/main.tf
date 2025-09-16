@@ -1,28 +1,54 @@
-resource "helm_release" "ingress_nginx" {
-  name       = "ingress-nginx"
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  namespace  = "ingress-nginx"
-  create_namespace = true
-  # Pinning to ingress-controller v1.10.1 (default by chart 4.10.1) to avoid breaking changes
-  version    = "4.10.1"
-  set {
-    name  = "controller.service.loadBalancerIP"
-    value = var.ingress_ip
-  }
-}
-
 resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   namespace  = "cert-manager"
   create_namespace = true
-  # Pinning to version 1.13.3 to avoid breaking changes
-  version    = "1.13.3"
+  version = "1.15"
+  set {
+    name = "crds.enabled"
+    value = "true"
+  }
+  set {
+    name = "config.apiVersion"
+    value = "controller.config.cert-manager.io/v1alpha1"
+  }
+  set {
+    name = "config.kind"
+    value = "ControllerConfiguration"
+  }
+  set {
+    name = "config.enableGatewayAPI"
+    value = true
+  }
+}
+
+resource "helm_release" "ingress_nginx" {
+  count = var.controller_type == "ingress" ? 1 : 0
+  name       = "ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "ingress-nginx"
+  namespace  = "ingress-nginx"
+  create_namespace = true
+  set {
+    name  = "controller.service.loadBalancerIP"
+    value = var.ingress_ip
+  }
+}
+
+resource "helm_release" "gateway_api_controller" {
+  count = var.controller_type == "gatewayapi" ? 1 : 0
+  name       = "gateway-api"
+  chart      = "gateway-api/chart"
+  namespace  = "nginx-gateway"
+  create_namespace = true
+  set {
+    name  = "controller.service.loadBalancerIP"
+    value = var.ingress_ip
+  }
   set {
     name  = "installCRDs"
-    value = "true"
+    value = true
   }
 }
 

@@ -17,3 +17,9 @@ variable "ingress_ip" {
   description = "The IP address for the ingress NGINX service"
   type        = string
 }
+
+variable "controller_type" {
+  description = "Type of ingress controller to deploy: 'ingress' or 'gatewayapi'"
+  type        = string
+  default     = "ingress"
+}
