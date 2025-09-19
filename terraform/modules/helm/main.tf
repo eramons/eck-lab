@@ -1,10 +1,39 @@
+resource "helm_release" "ingress_nginx" {
+  count = var.controller_type == "ingress" ? 1 : 0
+  name       = "ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "ingress-nginx"
+  namespace  = "ingress-nginx"
+  create_namespace = true
+  set {
+    name  = "controller.service.loadBalancerIP"
+    value = var.ingress_ip
+  }
+}
+
+#resource "helm_release" "gateway_api_controller" {
+#  count = var.controller_type == "gatewayapi" ? 1 : 0
+#  name       = "nginx-gateway"
+#  chart      = "oci://ghcr.io/nginx/charts/nginx-gateway-fabric"
+#  namespace  = "nginx-gateway"
+#  create_namespace = true
+#  set {
+#    name  = "controller.service.loadBalancerIP"
+#    value = var.ingress_ip
+#  }
+#  set {
+#    name  = "installCRDs"
+#    value = true
+#  }
+#}
+
 resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   namespace  = "cert-manager"
   create_namespace = true
-  version = "1.15"
+#  version = "1.15"
   set {
     name = "crds.enabled"
     value = "true"
@@ -19,36 +48,7 @@ resource "helm_release" "cert_manager" {
   }
   set {
     name = "config.enableGatewayAPI"
-    value = true
-  }
-}
-
-resource "helm_release" "ingress_nginx" {
-  count = var.controller_type == "ingress" ? 1 : 0
-  name       = "ingress-nginx"
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  namespace  = "ingress-nginx"
-  create_namespace = true
-  set {
-    name  = "controller.service.loadBalancerIP"
-    value = var.ingress_ip
-  }
-}
-
-resource "helm_release" "gateway_api_controller" {
-  count = var.controller_type == "gatewayapi" ? 1 : 0
-  name       = "gateway-api"
-  chart      = "gateway-api/chart"
-  namespace  = "nginx-gateway"
-  create_namespace = true
-  set {
-    name  = "controller.service.loadBalancerIP"
-    value = var.ingress_ip
-  }
-  set {
-    name  = "installCRDs"
-    value = true
+    value = var.controller_type == "gatewayapi" ? "true" : "false"
   }
 }
 

@@ -34,8 +34,6 @@ module "gke" {
   gcp_project = var.gcp_project
   gcp_region = var.gcp_region
   gcp_location = var.gcp_location
-# Remove?
-  gcp_key_path = var.gcp_key_path
   dns_hostname = var.dns_hostname
   dns_managed_zone = var.dns_managed_zone
 }
