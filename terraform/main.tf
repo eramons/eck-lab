@@ -9,7 +9,6 @@ terraform {
 provider "google" {
   project     = var.gcp_project
   region      = var.gcp_region
-  credentials = var.gcp_key_path
 }
 
 data "google_client_config" "default" {}
@@ -35,7 +34,6 @@ module "gke" {
   gcp_project = var.gcp_project
   gcp_region = var.gcp_region
   gcp_location = var.gcp_location
-  gcp_key_path = var.gcp_key_path
   dns_hostname = var.dns_hostname
   dns_managed_zone = var.dns_managed_zone
 }
@@ -52,9 +50,13 @@ output "gke_cluster_endpoint" {
   value = module.gke.cluster_endpoint
 }
 
-output "cluster_ca_certificate" {
-  value = module.gke.cluster_ca_certificate
+output "public_ip" {
+  value = module.gke.ingress_ip
 }
+
+#output "cluster_ca_certificate" {
+#  value = module.gke.cluster_ca_certificate
+#}
 
 # Call Helm Module
 module "helm" {
@@ -75,11 +77,10 @@ module "ollama" {
   demo_name = var.demo_name
 
   # Pass the networking information from the GKE module, so the K8s cluster and the VM are in the same subnet
-  gcp_vpc_name         = module.gke.gcp_vpc_name
+  gcp_vpc_name             = module.gke.gcp_vpc_name
   gcp_vpc_self_link        = module.gke.gcp_vpc_self_link
   gcp_vpc_subnet_self_link = module.gke.gcp_vpc_subnet_self_link
   gcp_vpc_pod_cidr         = module.gke.pod_cidr
-
 
   # Only deploy if the flag is true
   count = var.deploy_ollama ? 1 : 0

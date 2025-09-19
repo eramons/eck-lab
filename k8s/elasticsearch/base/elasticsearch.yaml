@@ -19,11 +19,11 @@ spec:
         - name: elasticsearch
           resources:
             requests:
-              memory: 2Gi  # Minimum memory request for Elasticsearch
-              cpu: 1       # Minimum CPU request for Elasticsearch
+              memory: 2Gi  
+              cpu: 1  
             limits:
-              memory: 2Gi  # Maximum memory limit for Elasticsearch
-              cpu: 2       # Maximum CPU limit for Elasticsearch
+              memory: 2Gi 
+              cpu: 2  
 
     # Persistent Volume Claim for Elasticsearch data storage
     # Use volumeClaimTemplates to request storage for each Elasticsearch pod in the StatefulSet

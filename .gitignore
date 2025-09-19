@@ -18,6 +18,9 @@ k8s/license/
 # Ignore ingress.yaml (commit the .sample file instead)
 k8s/elasticsearch/ingress/ingress.yaml
 
+# Same for httproute.yaml
+k8s/elasticsearch/gateway/httproute.yaml
+
 # Ignore ollama config text file
 k8s/elasticsearch/ml/connector-config.txt
 

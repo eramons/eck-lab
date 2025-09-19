@@ -13,11 +13,11 @@ spec:
         - name: kibana
           resources:
             requests:
-              memory: 1Gi  # Minimum memory request for Kibana
-              cpu: 1       # Minimum CPU request for Kibana
+              memory: 1Gi  
+              cpu: 1 
             limits:
-              memory: 1Gi  # Maximum memory limit for Kibana
-              cpu: 1       # Maximum CPU limit for Kibana
+              memory: 1Gi
+              cpu: 1 
   http:
     service:
       spec:
